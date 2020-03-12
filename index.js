@@ -43,7 +43,8 @@ app.get("/campgrounds",function(req, res) {
 app.post("/campgrounds", function(req, res) {
     let title = req.body.title
     let imgURL = req.body.imgURL
-    let newCampground = {title: title, imgURL: imgURL}
+    let disc = req.body.disc
+    let newCampground = {title: title, imgURL: imgURL, disc: disc}
 
     Campground.create(newCampground, function(err) {
         if(err) {
@@ -59,7 +60,13 @@ app.get("/campgrounds/new", function(req, res) {
 })
 
 app.get("/campgrounds/:id", function(req, res) {
-    
+    Campground.findById(req.params.id, function(err, campground) {
+        if(err) {
+            console.log(err)
+        } else {
+            res.render("show", {campground: campground})
+        }
+    })
 })
 
 app.listen(3000, function() {
