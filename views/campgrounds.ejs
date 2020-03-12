@@ -1,5 +1,15 @@
-<h1>Campgrounds</h1>
+<%- include("partials/header") %> 
 
+<h1>Campgrounds</h1>
+<a href="/campgrounds/new">Create New Campground</a>
 <% campgrounds.forEach(element => { %>
-    <li><%= element.title%></li>
+  <div class="card" style="width: 18rem;">
+    <img src="<%= element.img %>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= element.title %></h5>
+    </div>
+  </div>
 <% }) %>
+
+
+<%- include("partials/footer") %> 
