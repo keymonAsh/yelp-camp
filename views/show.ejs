@@ -6,4 +6,11 @@
 <img src="<%= campground.imgURL%>" class="img-thumbnail" alt="...">
 <p><%= campground.disc%></p>
 
+<h1>Comments</h1>
+
+<% campground.comments.forEach(comment => { %>
+    <p><%= comment.author%> : <%= comment.text%></p>
+<% }) %>
+
+
 <%- include("partials/footer") %> 

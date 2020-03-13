@@ -47,14 +47,23 @@ app.get("/campgrounds/new", function(req, res) {
     res.render("new");
 })
 
+//show route
 app.get("/campgrounds/:id", function(req, res) {
-    Campground.findById(req.params.id, function(err, campground) {
+    // Campground.findById(req.params.id, function(err, campground) {
+    //     if(err) {
+    //         console.log(err)
+    //     } else {
+    //         res.render("show", {campground: campground})
+    //     }
+    // })
+    Campground.findById(req.params.id).populate("comments").exec(function(err, campground) {
         if(err) {
             console.log(err)
         } else {
             res.render("show", {campground: campground})
         }
     })
+
 })
 
 app.listen(3000, function() {
