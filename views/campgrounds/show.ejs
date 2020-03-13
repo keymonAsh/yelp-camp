@@ -1,4 +1,4 @@
-<%- include("partials/header") %> 
+<%- include("../partials/header") %> 
 
 <h1>Thisn is the show templeate</h1>
 
@@ -12,5 +12,6 @@
     <p><%= comment.author%> : <%= comment.text%></p>
 <% }) %>
 
+<a href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
 
-<%- include("partials/footer") %> 
+<%- include("../partials/footer") %> 
