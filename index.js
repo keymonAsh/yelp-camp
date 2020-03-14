@@ -4,9 +4,26 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Campground = require('./models/campgrounds')
 const Comment = require('./models/comments')
+const User = require('./models/user')
 const seedDB = require('./seeds')
 
+const passport = require('passport')
+const localStrategy = require('passport-local')
+
 seedDB()
+
+// passport Congig
+
+app.use(require('express-session')({
+    secret: "sfgkjbfgiklhwlfikgjr",
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new localStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true });
 
@@ -94,6 +111,25 @@ app.post("/campgrounds/:id/comments", function(req, res) {
                     campground.save()
                     res.redirect("/campgrounds/" + campground._id)
                 }
+            })
+        }
+    })
+})
+
+// AUTH Routes
+
+app.get("/register", function(req, res) {
+    res.render("register")
+})
+
+app.post("/register", function(req, res) {
+    const newUser =  new User({username: req.body.username})
+    User.register(newUser, req.body.password, function(err, user) {
+        if(err) {
+            console.log(err)
+        } else {
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("/campgrounds")
             })
         }
     })
