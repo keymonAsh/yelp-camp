@@ -23,7 +23,7 @@
                     <h5 class="card-title"><%= campground.title%></h5>
 
                     <p class="card-text"><%= campground.disc%></p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text"><small class="text-muted"><%= campground.author.username%></small></p>
                 </div>
             </div>
             <a class="float-right btn btn-success" href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
