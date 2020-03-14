@@ -2,16 +2,54 @@
 
 <h1>Thisn is the show templeate</h1>
 
-<h1><%= campground.title%></h1>
-<img src="<%= campground.imgURL%>" class="img-thumbnail" alt="...">
-<p><%= campground.disc%></p>
+<div class="container">
 
-<h1>Comments</h1>
 
-<% campground.comments.forEach(comment => { %>
-    <p><%= comment.author%> : <%= comment.text%></p>
-<% }) %>
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item">NOde1</li>
+                <li class="list-group-item">node123</li>
+                <li class="list-group-item">fwefEWFWE</li>
+            </div>
+        </div>
 
-<a href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
+        <div class="col-md-9">
+            <div class="card mb-3">
+                <img class="card-img-top" src="<%= campground.imgURL%>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="float-right">Price</h5>
+                    <h5 class="card-title"><%= campground.title%></h5>
+
+                    <p class="card-text"><%= campground.disc%></p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <a class="float-right btn btn-success" href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
+            <h1>Comments</h1>
+
+             <% campground.comments.forEach(comment => { %>
+                <p><strong><%= comment.author%></strong> : <%= comment.text%></p>
+            <% }) %>
+            
+           <hr>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    
+    <p></p>
+    
+
+    
+
+    
+</div>
 
 <%- include("../partials/footer") %> 
