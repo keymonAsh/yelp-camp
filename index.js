@@ -14,7 +14,7 @@ const campgroundsRoutes = require('./routes/campgrounds')
 const commentsRoutes = require('./routes/comments')
 const indexRoutes = require('./routes/index')
 
-seedDB()
+// seedDB()
 
 // passport Congig
 

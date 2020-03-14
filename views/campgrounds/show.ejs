@@ -30,7 +30,7 @@
             <h1>Comments</h1>
 
              <% campground.comments.forEach(comment => { %>
-                <p><strong><%= comment.author%></strong> : <%= comment.text%></p>
+                <p><strong><%= comment.author.username%></strong> : <%= comment.text%></p>
             <% }) %>
             
            <hr>
