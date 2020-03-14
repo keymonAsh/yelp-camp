@@ -118,6 +118,8 @@ app.post("/campgrounds/:id/comments", function(req, res) {
 
 // AUTH Routes
 
+
+// register
 app.get("/register", function(req, res) {
     res.render("register")
 })
@@ -133,6 +135,21 @@ app.post("/register", function(req, res) {
             })
         }
     })
+})
+
+// log in
+
+app.get("/login", function(req, res) {
+    res.render("login")
+})
+
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/campgrounds",
+        failureRedirect: "/login"
+    }), 
+    function(req, res) {
+        
 })
 
 app.listen(3000, function() {
