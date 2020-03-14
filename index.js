@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 const Campground = require('./models/campgrounds')
 const Comment = require('./models/comments')
 const User = require('./models/user')
@@ -38,6 +39,7 @@ mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
+app.use(methodOverride("_method"))
 
 
 app.use(indexRoutes)

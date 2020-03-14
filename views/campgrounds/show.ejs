@@ -24,6 +24,7 @@
 
                     <p class="card-text"><%= campground.disc%></p>
                     <p class="card-text"><small class="text-muted"><%= campground.author.username%></small></p>
+                    <a href="/campgrounds/<%= campground._id%>/edit">Edit</a>
                 </div>
             </div>
             <a class="float-right btn btn-success" href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
