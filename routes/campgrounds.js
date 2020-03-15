@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Campground = require('../models/campgrounds')
-
+const middleware = require('../middleware')
 router.get("/",function(req, res) {
     // console.log(req.user)
     Campground.find({}, function(err, campgrounds) {
@@ -13,7 +13,7 @@ router.get("/",function(req, res) {
     })
 })
 
-router.post("/", isLoggedIn, function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
     let title = req.body.title
     let imgURL = req.body.imgURL
     let disc = req.body.disc
@@ -32,7 +32,7 @@ router.post("/", isLoggedIn, function(req, res) {
     })
 })
 
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
     res.render("campgrounds/new");
 })
 
@@ -55,7 +55,7 @@ router.get("/:id", function(req, res) {
 
 })
 
-router.get("/:id/edit" , campgroundUserCheck, function(req, res) {
+router.get("/:id/edit" , middleware.campgroundUserCheck, function(req, res) {
     Campground.findById(req.params.id, function(err, campground) {
         if(err) {
             console.log(err)
@@ -80,7 +80,7 @@ router.put("/:id", function(req, res) {
 })
 
 
-router.delete("/:id", campgroundUserCheck, function(req, res) {
+router.delete("/:id", middleware.campgroundUserCheck, function(req, res) {
     Campground.findByIdAndRemove(req.params.id, function(err) {
         if(err) {
             console.log(err)
@@ -89,31 +89,5 @@ router.delete("/:id", campgroundUserCheck, function(req, res) {
         }
     })
 })
-
-// MIDDLEWARE
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next()
-    }
-    res.redirect("/login")
-}
-
-function campgroundUserCheck(req, res, next) {
-    if(req.isAuthenticated()) {
-        Campground.findById(req.params.id, function(err, campground) {
-            if(err) {
-                console.log(err)
-            } else {
-                if(campground.author.id.equals(req.user._id)) {
-                    next()
-                } else {
-                    res.send("YOU DONT HAVE PERMISSION")
-                }
-            }
-        })
-    } else {
-        res.redirect("back")
-    }
-}
 
 module.exports = router
