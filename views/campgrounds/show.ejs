@@ -24,10 +24,17 @@
 
                     <p class="card-text"><%= campground.disc%></p>
                     <p class="card-text"><small class="text-muted"><%= campground.author.username%></small></p>
-                    <a class="btn btn-warning" href="/campgrounds/<%= campground._id%>/edit">Edit</a>
-                    <form class="float-right" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">DELETE</button>
-                    </form>
+                    
+                    <% if (currUser && campground.author.id.equals(currUser._id)) { %>
+                        <div>
+                            <a class="btn btn-warning" href="/campgrounds/<%= campground._id%>/edit">Edit</a>
+                            <form class="float-right" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">DELETE</button>
+                            </form>
+                        </div>
+                    <% } %>
+                    
+
                 </div>
             </div>
             <a class="float-right btn btn-success" href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
