@@ -38,10 +38,14 @@
                 </div>
             </div>
             <a class="float-right btn btn-success" href="/campgrounds/<%= campground._id%>/comments/new">Add a comment</a>
+
+            <!-- COMMENTS -->
+
             <h1>Comments</h1>
 
-             <% campground.comments.forEach(comment => { %>
+            <% campground.comments.forEach(comment => { %>
                 <p><strong><%= comment.author.username%></strong> : <%= comment.text%></p>
+                <a href="/campgrounds/<%= campground._id%>/comments/<%= comment._id%>/edit">Edit</a>
             <% }) %>
             
            <hr>
