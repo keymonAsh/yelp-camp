@@ -37,7 +37,7 @@ router.post("/", isLoggedIn, function(req, res) {
     })
 })
 
-router.get("/:comment_id/edit", function(req, res) {
+router.get("/:comment_id/edit", commentUserCheck, function(req, res) {
     Comment.findById(req.params.comment_id, function(err, comment) {
         if(err) {
             res.redirect("back")
@@ -48,7 +48,7 @@ router.get("/:comment_id/edit", function(req, res) {
     })
 })
 
-router.put("/:comment_id", function(req, res) {
+router.put("/:comment_id", commentUserCheck, function(req, res) {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment) {
         if(err) {
             console.log(err)
@@ -58,7 +58,7 @@ router.put("/:comment_id", function(req, res) {
     })
 })
 
-router.delete("/:comment_id", function(req, res) {
+router.delete("/:comment_id", commentUserCheck, function(req, res) {
     Comment.findByIdAndRemove(req.params.comment_id, function(err) {
         if(err) {
             console.log(err)
@@ -68,11 +68,33 @@ router.delete("/:comment_id", function(req, res) {
     })
 })
 
+// MIDDLEWAre
+
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next()
     }
     res.redirect("/login")
+}
+
+
+
+function commentUserCheck(req, res, next) {
+    if(req.isAuthenticated()) {
+        Comment.findById(req.params.comment_id, function(err, comment) {
+            if(err) {
+                console.log(err)
+            } else {
+                if(comment.author.id.equals(req.user._id)) {
+                    next()
+                } else {
+                    res.redirect("back")
+                }
+            }
+        })
+    } else {
+        res.redirect("back")
+    }
 }
 
 module.exports = router
