@@ -1,6 +1,5 @@
 <%- include("../partials/header") %> 
 
-<h1>Thisn is the show templeate</h1>
 
 <div class="container">
 
@@ -9,9 +8,9 @@
         <div class="col-md-3">
             <p class="lead">YelpCamp</p>
             <div class="list-group">
-                <li class="list-group-item">NOde1</li>
-                <li class="list-group-item">node123</li>
-                <li class="list-group-item">fwefEWFWE</li>
+                <li class="list-group-item">out</li>
+                <li class="list-group-item">of</li>
+                <li class="list-group-item">Content</li>
             </div>
         </div>
 
@@ -19,17 +18,16 @@
             <div class="card mb-3">
                 <img class="card-img-top" src="<%= campground.imgURL%>" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="float-right">Price</h5>
                     <h5 class="card-title"><%= campground.title%></h5>
 
                     <p class="card-text"><%= campground.disc%></p>
-                    <p class="card-text"><small class="text-muted"><%= campground.author.username%></small></p>
+                    <p class="card-text lead">Campground By : <%= campground.author.username%></p>
                     
                     <% if (currUser && campground.author.id.equals(currUser._id)) { %>
                         <div>
-                            <a class="btn btn-warning" href="/campgrounds/<%= campground._id%>/edit">Edit</a>
+                            <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id%>/edit">Edit</a>
                             <form class="float-right" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
-                                <button class="btn btn-danger">DELETE</button>
+                                <button class="btn btn-danger btn-sm">DELETE</button>
                             </form>
                         </div>
                     <% } %>

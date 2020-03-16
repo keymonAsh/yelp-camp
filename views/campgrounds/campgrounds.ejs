@@ -1,16 +1,26 @@
 <%- include("../partials/header") %> 
-
-<h1>Campgrounds</h1>
-<a href="/campgrounds/new">Create New Campground</a>
-<% campgrounds.forEach(element => { %>
-  <div class="card" style="width: 18rem;">
-    <img src="<%= element.imgURL %>" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><%= element.title %></h5>
-      <a class="btn btn-info btn-sm" href="/campgrounds/<%= element._id%>">Read More</a>
-    </div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Campgrounds</h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <a class="btn btn-primary" href="/campgrounds/new">Add a Campground</a>
   </div>
-<% }) %>
+
+</div>
+
+<div class="container d-flex">
+  <% campgrounds.forEach(element => { %>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= element.imgURL %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= element.title %></h5>
+        <a class="btn btn-info btn-sm" href="/campgrounds/<%= element._id%>">Read More</a>
+      </div>
+    </div>
+  <% }) %>
+  
+</div>
+
 
 
 <%- include("../partials/footer") %> 
