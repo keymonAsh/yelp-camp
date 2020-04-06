@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
     next()
 })
 
-mongoose.connect("mongodb+srv://aswin_1234:aswin_1234@cluster0-sy0vr.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+mongoose.connect("" , { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
@@ -42,6 +42,6 @@ app.use("/campgrounds/:id/comments", commentsRoutes)
 app.use("/campgrounds", campgroundsRoutes)
 
 
-app.listen(process.env.PORT, process.env.IP, function() {
+app.listen(3000, function() {
     console.log("Server Live")
 })
